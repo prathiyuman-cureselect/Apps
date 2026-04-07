@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PetSync360 – Official Download</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #E37383;
+            --brand-dark: #c45566;
+            --brand-light: #fff0f2;
+            --brand-glow: rgba(227, 115, 131, 0.3);
+            --text: #2d2d44;
+            --muted: #7a7a95;
+            --bg: #fdfafb;
+            --card: #ffffff;
+            --white: #ffffff;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+        }
+
+        /* --- Animated Background Elements --- */
+        .bg-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            animation: move 20s infinite alternate;
+        }
+        .blob-1 { width: 400px; height: 400px; background: #ffe4e8; top: -10%; right: -5%; }
+        .blob-2 { width: 300px; height: 300px; background: #f0e7ff; bottom: -5%; left: -5%; animation-delay: -5s; }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(50px, 100px) scale(1.1); }
+        }
+
+        /* --- Main Card --- */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+            padding: 3rem 2rem;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Logo Styling (Updated for White Background) --- */
+        .logo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .logo-circle {
+            width: 90px; height: 90px;
+            border-radius: 22px;
+            background: var(--white); /* Changed to pure white */
+            display: flex; align-items: center; justify-content: center;
+            /* Professional soft shadow and border */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.1);
+            border: 1px solid #f0f0f0; 
+            margin-bottom: 1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 12px;
+        }
+        .logo-circle:hover { 
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .logo-circle img { 
+            width: 100%; height: 100%; 
+            object-fit: contain;
+        }
+
+        .app-name {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+        .app-name span { color: var(--brand); }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Feature Pills --- */
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 2.5rem;
+        }
+        .pill {
+            background: #fdfdfd;
+            border: 1px solid #f0f0f0;
+            padding: 12px 8px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: var(--text);
+            transition: all 0.2s ease;
+        }
+        .pill svg { width: 16px; height: 16px; fill: var(--brand); }
+
+        /* --- Download Button --- */
+        .btn-download {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 18px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 10px 20px var(--brand-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn-download::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -60%;
+            width: 40px; height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: rotate(30deg);
+            animation: shine 5s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -60%; }
+            10% { left: 120%; }
+            100% { left: 120%; }
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+
+        .version {
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin: 1.2rem 0 0;
+            font-weight: 500;
+        }
+
+        /* --- Progress Overlay --- */
+        #progress-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        #progress-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+
+        .spinner {
+            width: 50px; height: 50px;
+            border: 4px solid var(--brand-light);
+            border-top: 4px solid var(--brand);
+            border-radius: 50%;
+            animation: spin 0.8s infinite linear;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .footer { font-size: 0.65rem; margin-top: 2rem; color: #b0b0c0; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <div class="card">
+        <div class="logo-wrap">
+            <div class="logo-circle">
+                <img src="./asserts/petsync-logo.png" alt="Logo" />
+            </div>
+            <h1 class="app-name">Pet<span>Sync</span>360</h1>
+        </div>
+
+        <p class="tagline">Premium care and essentials for your furry family members.</p>
+
+        <div class="features">
+            <div class="pill">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                Fast Delivery
+            </div>
+            <div class="pill">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                Health Care
+            </div>
+            <div class="pill">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                Safe Pay
+            </div>
+            <div class="pill">
+                <svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                Real-time
+            </div>
+        </div>
+
+        <a href="./asserts/app-release.apk" class="btn-download" id="dlBtn" onclick="handleDownload(event)">
+            <svg style="width:22px; height:22px" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7z"/></svg>
+            Download Android App
+        </a>
+
+        <p class="version">v1.0.2 • 24.8 MB • Secure APK</p>
+
+        <p class="footer">© 2026 PetSync360 Technology</p>
+    </div>
+
+    <div id="progress-overlay">
+        <div class="spinner"></div>
+        <p style="margin-top:20px; font-weight:700; color:var(--brand-dark); font-family: 'Nunito';">Preparing your download...</p>
+    </div>
+
+    <script>
+        function handleDownload(e) {
+            e.preventDefault();
+            const url = e.currentTarget.href;
+            const overlay = document.getElementById('progress-overlay');
+            
+            overlay.classList.add('active');
+
+            setTimeout(() => {
+                overlay.innerHTML = `
+                    <div style="font-size: 50px">✅</div>
+                    <p style="margin-top:20px; font-weight:700; color:var(--brand-dark); font-family: 'Nunito';">Download Started!</p>
+                `;
+                
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                    window.location.href = url;
+                }, 1000);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
