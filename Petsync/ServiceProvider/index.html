@@ -28,7 +28,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 40px 20px;
             overflow-x: hidden;
         }
 
@@ -40,32 +40,118 @@
             z-index: -1;
             animation: move 25s infinite alternate;
         }
-        .blob-1 { width: 500px; height: 500px; background: #ffeef0; top: -10%; right: -5%; }
-        .blob-2 { width: 400px; height: 400px; background: #f2ebff; bottom: -5%; left: -5%; animation-delay: -7s; }
+        .blob-1 { width: 600px; height: 600px; background: #ffeef0; top: -10%; right: -5%; }
+        .blob-2 { width: 500px; height: 500px; background: #f2ebff; bottom: -5%; left: -5%; animation-delay: -7s; }
 
         @keyframes move {
             from { transform: translate(0, 0) rotate(0deg); }
-            to { transform: translate(60px, 120px) rotate(30deg); }
+            to { transform: translate(40px, 80px) rotate(20deg); }
         }
 
-        /* --- Premium Card --- */
+        /* --- Layout Container --- */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1000px;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 900px) {
+            .hero-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+
+        /* --- Phone Mockup (Left Side) --- */
+        .phone-mockup {
+            position: relative;
+            width: 320px;
+            height: 650px;
+            background: #000;
+            border-radius: 45px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15), inset 0 0 0 10px #000;
+            border: 2px solid #ddd;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 25px;
+            background: #000;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+
+        /* Here is where the user will place their actual screenshot */
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FFE4E8 0%, #E37383 100%);
+            border-radius: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            object-fit: cover;
+        }
+        
+        .mockup-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 35px;
+            display: none; /* User can toggle true when they add an image */
+        }
+
+        .placeholder-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .placeholder-sub {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- Premium Card (Right Side) --- */
         .card {
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             border-radius: 40px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255,255,255,0.5);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
             padding: 3.5rem 2.5rem;
             max-width: 440px;
             width: 100%;
             text-align: center;
             animation: cardEntrance 1s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
         }
 
         @keyframes cardEntrance {
-            from { opacity: 0; transform: translateY(40px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- Logo Section --- */
@@ -77,7 +163,7 @@
             box-shadow: 0 12px 24px rgba(0,0,0,0.04), 0 4px 8px rgba(0,0,0,0.02);
             border: 1px solid #f2f2f2;
             margin: 0 auto 1.5rem;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.5s ease;
             position: relative;
             padding: 15px;
         }
@@ -85,7 +171,7 @@
             content: ''; position: absolute; inset: 0; border-radius: 24px;
             box-shadow: inset 0 2px 4px rgba(255,255,255,1), inset 0 -2px 4px rgba(0,0,0,0.02);
         }
-        .logo-circle:hover { transform: translateY(-8px) rotate(3deg); }
+        .logo-circle:hover { transform: translateY(-5px) scale(1.05); }
         .logo-circle img { width: 100%; height: 100%; object-fit: contain; }
 
         .app-name {
@@ -105,7 +191,7 @@
             font-weight: 400;
         }
 
-        /* --- Staggered Feature Pills --- */
+        /* --- Features --- */
         .features {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -113,27 +199,23 @@
             margin-bottom: 2.5rem;
         }
         .pill {
-            background: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.7);
             border: 1px solid #eee;
             padding: 12px;
             border-radius: 18px;
             font-size: 0.8rem;
             font-weight: 600;
             display: flex; align-items: center; justify-content: center; gap: 8px;
-            animation: fadeInPill 0.5s ease backwards;
+            transition: all 0.3s ease;
         }
-        .pill:nth-child(1) { animation-delay: 0.4s; }
-        .pill:nth-child(2) { animation-delay: 0.5s; }
-        .pill:nth-child(3) { animation-delay: 0.6s; }
-        .pill:nth-child(4) { animation-delay: 0.7s; }
-
-        @keyframes fadeInPill {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(227, 115, 131, 0.15);
+            border-color: var(--brand-light);
         }
         .pill svg { width: 18px; height: 18px; fill: var(--brand); }
 
-        /* --- Professional Download Button --- */
+        /* --- Download Button --- */
         .btn-container { width: 100%; position: relative; }
         
         .btn-download {
@@ -155,7 +237,6 @@
             cursor: pointer;
         }
 
-        /* Progress Bar inside button */
         .btn-progress {
             position: absolute; bottom: 0; left: 0; height: 4px;
             background: rgba(255,255,255,0.4);
@@ -163,6 +244,7 @@
         }
 
         .btn-download:active { transform: scale(0.97); }
+        .btn-download:hover { box-shadow: 0 20px 40px var(--brand-glow); transform: translateY(-2px); }
         
         .btn-download.success {
             background: #4CAF50;
@@ -206,44 +288,62 @@
     <div class="bg-blob blob-1"></div>
     <div class="bg-blob blob-2"></div>
 
-    <div class="card">
-        <div class="logo-circle">
-            <img src="./asserts/petsync-logo.png" alt="PetSync360" />
-        </div>
+    <div class="hero-container">
         
-        <h1 class="app-name">Petsync <span>ServiceProvider</span></h1>
-        <p class="tagline">Your all-in-one companion for digital pet care & wellness.</p>
-
-        <div class="features">
-            <div class="pill">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-                Teleconsult
-            </div>
-            <div class="pill">
-                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                Pet Retail
-            </div>
-            <div class="pill">
-                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-                Secure Pay
-            </div>
-            <div class="pill">
-                <svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                Petcare Services
+        <!-- Left Column: Attractive UI Showcase -->
+        <div class="phone-mockup">
+            <!-- TO SHOW YOUR UI: Uncomment the img tag below and give it the path to your UI screenshot! -->
+            
+            <!-- <img src="../../asserts/my-app-screenshot.png" class="mockup-img" style="display:block;" alt="App UI" /> -->
+            
+            <!-- This is the placeholder gradient showing below until you uncomment the image -->
+            <div class="phone-screen" id="placeholder-screen">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="#fff" style="margin-bottom:15px; opacity:0.9"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/><path d="M13.5 13.5L11 10.5 7.5 15h9z"/></svg>
+                <div class="placeholder-text">Your UI Here</div>
+                <div class="placeholder-sub">Place your app screenshot inside the .phone-mockup code</div>
             </div>
         </div>
 
-        <div class="btn-container">
-            <button class="btn-download" id="dlBtn" onclick="initDownload()">
-                <span id="btnText">Download for Android</span>
-                <svg id="btnIcon" style="width:22px; height:22px" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7z"/></svg>
-                <div class="btn-progress" id="progress"></div>
-            </button>
+        <!-- Right Column: Download Card -->
+        <div class="card">
+            <div class="logo-circle">
+                <img src="../../asserts/petsync-logo.png" alt="Petsync" />
+            </div>
+            
+            <h1 class="app-name">Petsync <span>ServiceProvider</span></h1>
+            <p class="tagline">Your all-in-one companion for digital pet care & wellness.</p>
+
+            <div class="features">
+                <div class="pill">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                    Teleconsult
+                </div>
+                <div class="pill">
+                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    Pet Retail
+                </div>
+                <div class="pill">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                    Secure Pay
+                </div>
+                <div class="pill">
+                    <svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    Petcare Services
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <button class="btn-download" id="dlBtn" onclick="initDownload()">
+                    <span id="btnText">Download for Android</span>
+                    <svg id="btnIcon" style="width:22px; height:22px" fill="currentColor" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7z"/></svg>
+                    <div class="btn-progress" id="progress"></div>
+                </button>
+            </div>
+
+            <span class="version">v1.0.2 • 107.3 MB • Verified APK</span>
+
+            <p class="footer">© 2026 Petsync • Built for Pet Parents</p>
         </div>
-
-        <span class="version">v1.0.2 • 107.3 MB • Verified APK</span>
-
-        <p class="footer">© 2026 PetSync360 • Built for Pet Parents</p>
     </div>
 
     <div id="loading-overlay">
@@ -275,8 +375,8 @@
                     text.innerText = "Download Started!";
                     icon.innerHTML = '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>';
                     
-                    // Final: Trigger actual file download from GitHub Release
-                    window.location.href = "https://github.com/prathiyuman-cureselect/Apps/releases/download/ServiceProvider/app-release.apk";
+                    // Final: Trigger actual file download from GitHub Release - using app-release.1.apk!
+                    window.location.href = "https://github.com/prathiyuman-cureselect/Apps/releases/download/ServiceProvider/app-release.1.apk";
                 }, 2000);
             }, 1500);
         }
